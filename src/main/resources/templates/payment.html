@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Upgrade - BookVault</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-book-half"></i> BookVault
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                    aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="bi bi-house me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/books"><i class="bi bi-grid me-1"></i>Browse</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rating.html"><i class="bi bi-star-fill me-1" style="color:var(--clr-amber);"></i>Rate Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/payment.html"><i class="bi bi-credit-card-2-front me-1" style="color:var(--clr-teal);"></i>Premium</a>
+                    </li>
+                </ul>
+
+                <!-- Search box -->
+                <form class="d-flex me-3" action="/books/search" method="get">
+                    <div class="input-group" style="min-width:200px;">
+                        <input class="form-control form-control-sm" type="search" name="keyword"
+                               id="navSearchInput"
+                               placeholder="Search books...">
+                        <button class="btn btn-outline-light btn-sm" type="submit" id="navSearchBtn">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <ul class="navbar-nav align-items-center gap-1">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register"><i class="bi bi-person-plus me-1"></i>Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Background Layer -->
+    <div class="payment-glow-bg"></div>
+
+    <div class="container py-5">
+        <div class="row g-4 justify-content-center">
+            
+            <!-- LEFT COLUMN: Tiers Selection -->
+            <div class="col-lg-5 col-md-6 order-2 order-lg-1">
+                <div class="h-100 d-flex flex-column gap-3 animate-fade-up">
+                    <h4 class="section-heading mb-1"><i class="bi bi-patch-check text-primary me-2"></i>Choose Your Plan</h4>
+                    <p class="text-muted small mb-3">Upgrade to BookVault Premium to support authors and access advanced features.</p>
+                    
+                    <!-- Tier 1: Monthly -->
+                    <div class="tier-card p-4 glass-heavy selected" id="tier-monthly" onclick="selectTier('monthly', 4.99, 'Monthly Explorer')">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-secondary-subtle text-secondary-emphasis">Explorer</span>
+                            <div class="price-wrapper text-end">
+                                <span class="fs-4 fw-bold text-white">$4.99</span>
+                                <small class="text-muted">/mo</small>
+                            </div>
+                        </div>
+                        <h5 class="fw-bold mb-2">Monthly Subscription</h5>
+                        <ul class="tier-features list-unstyled mb-0 text-muted small">
+                            <li><i class="bi bi-check-lg text-success me-2"></i> Read unlimited books online</li>
+                            <li><i class="bi bi-check-lg text-success me-2"></i> Standard PDF downloads</li>
+                            <li><i class="bi bi-check-lg text-success me-2"></i> Sync across 2 devices</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tier 2: Yearly (Recommended) -->
+                    <div class="tier-card p-4 glass-heavy position-relative" id="tier-yearly" onclick="selectTier('yearly', 39.99, 'Annual Scholar')">
+                        <div class="badge-recommended">Best Value</div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-primary-subtle text-primary-emphasis">Scholar</span>
+                            <div class="price-wrapper text-end">
+                                <span class="fs-3 fw-bold text-white">$39.99</span>
+                                <small class="text-muted">/yr</small>
+                            </div>
+                        </div>
+                        <h5 class="fw-bold mb-2">Annual Membership</h5>
+                        <ul class="tier-features list-unstyled mb-0 text-muted small">
+                            <li><i class="bi bi-check-lg text-success me-2"></i> Everything in Explorer</li>
+                            <li><i class="bi bi-check-lg text-success me-2"></i> High-speed priority downloads</li>
+                            <li><i class="bi bi-check-lg text-success me-2"></i> Sync across unlimited devices</li>
+                            <li><i class="bi bi-check-lg text-success me-2"></i> Early access to new releases</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tier 3: Lifetime -->
+                    <div class="tier-card p-4 glass-heavy" id="tier-lifetime" onclick="selectTier('lifetime', 99.99, 'Lifetime Curator')">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge bg-info-subtle text-info-emphasis">Curator</span>
+                            <div class="price-wrapper text-end">
+                                <span class="fs-4 fw-bold text-white">$99.99</span>
+                                <small class="text-muted">once</small>
+                            </div>
+                        </div>
+                        <h5 class="fw-bold mb-2">Lifetime Access</h5>
+                        <ul class="tier-features list-unstyled mb-0 text-muted small">
+                            <li><i class="bi bi-check-lg text-success me-2"></i> Perpetual access - pay once</li>
+                            <li><i class="bi bi-check-lg text-success me-2"></i> Unlimited offline reading files</li>
+                            <li><i class="bi bi-check-lg text-success me-2"></i> Premium Discord lounge membership</li>
+                            <li><i class="bi bi-check-lg text-success me-2"></i> Direct developer support requests</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Payment checkout with virtual card -->
+            <div class="col-lg-6 col-md-6 order-1 order-lg-2">
+                <div class="glass-heavy p-4 p-md-5 position-relative overflow-hidden glow-accent animate-fade-up-1">
+                    
+                    <!-- Decorative glowing gradient circles inside card -->
+                    <div class="glow-orb orb-1"></div>
+                    <div class="glow-orb orb-2"></div>
+
+                    <!-- Checkout Form Screen -->
+                    <div id="checkoutFormContainer" class="position-relative z-index-1">
+                        <div class="text-center mb-4">
+                            <h3 class="fw-bold" id="checkoutTitle">Premium Checkout</h3>
+                            <p class="text-muted small" id="checkoutSubtitle">Complete transaction for Monthly Explorer ($4.99)</p>
+                        </div>
+
+                        <!-- 3D VIRTUAL CREDIT CARD -->
+                        <div class="credit-card-wrapper mb-4">
+                            <div class="credit-card" id="creditCard">
+                                <!-- FRONT -->
+                                <div class="card-face card-front">
+                                    <div class="card-chip"></div>
+                                    <div class="card-logo"><i class="bi bi-credit-card-2-front"></i></div>
+                                    <div class="card-number" id="vCardNumber">•••• •••• •••• ••••</div>
+                                    <div class="card-details d-flex justify-content-between mt-auto">
+                                        <div class="card-holder-wrap">
+                                            <div class="card-label">CARD HOLDER</div>
+                                            <div class="card-name" id="vCardName">YOUR NAME HERE</div>
+                                        </div>
+                                        <div class="card-expiry-wrap">
+                                            <div class="card-label">EXPIRES</div>
+                                            <div class="card-expiry" id="vCardExpiry">MM/YY</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- BACK -->
+                                <div class="card-face card-back">
+                                    <div class="card-strip"></div>
+                                    <div class="card-back-content">
+                                        <div class="card-signature"></div>
+                                        <div class="card-cvv-box">
+                                            <div class="card-label text-end mb-1">CVV</div>
+                                            <div class="card-cvv" id="vCardCvv">•••</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Billing Inputs -->
+                        <form id="paymentForm" onsubmit="processPayment(event)">
+                            <div class="mb-3">
+                                <label for="cardName" class="form-label text-muted"><i class="bi bi-person me-1"></i> Cardholder Name</label>
+                                <input type="text" class="form-control" id="cardName" required placeholder="John Doe" oninput="updateCardName(this.value)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cardNumber" class="form-label text-muted"><i class="bi bi-credit-card me-1"></i> Card Number</label>
+                                <input type="text" class="form-control" id="cardNumber" required maxlength="19" placeholder="4111 2222 3333 4444" oninput="formatCardNumber(this)">
+                            </div>
+                            <div class="row g-3 mb-4">
+                                <div class="col-6">
+                                    <label for="cardExpiry" class="form-label text-muted"><i class="bi bi-calendar-event me-1"></i> Expiry Date</label>
+                                    <input type="text" class="form-control" id="cardExpiry" required maxlength="5" placeholder="MM/YY" oninput="formatExpiry(this)">
+                                </div>
+                                <div class="col-6">
+                                    <label for="cardCvv" class="form-label text-muted"><i class="bi bi-lock me-1"></i> CVV</label>
+                                    <input type="password" class="form-control" id="cardCvv" required maxlength="3" placeholder="123" onfocus="flipCard(true)" onblur="flipCard(false)" oninput="updateCardCvv(this.value)">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-auth w-100" id="checkoutBtn">
+                                <i class="bi bi-shield-lock me-2"></i> Pay $4.99 Securely
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Processing Gateway State -->
+                    <div id="processingContainer" class="position-relative z-index-1 text-center d-none py-5 animate-scale-up">
+                        <div class="spinner-border text-primary mb-4" role="status" style="width: 4rem; height: 4rem; border-width: 0.35em;">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <h4 class="fw-bold mb-2">Securing Connection...</h4>
+                        <p class="text-muted small" id="processingStatus">Verifying secure token layers with bank servers</p>
+                    </div>
+
+                    <!-- Checkout Success Screen -->
+                    <div id="paymentSuccessContainer" class="position-relative z-index-1 text-center d-none py-4 animate-scale-up">
+                        <div class="checkmark-circle mb-4">
+                            <i class="bi bi-check-lg checkmark"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1">Upgrade Successful!</h3>
+                        <p class="text-muted small mb-4" id="successTierText">You are now a Monthly Explorer member.</p>
+                        
+                        <!-- Mini Receipt -->
+                        <div class="receipt-card p-3 mb-4 text-start small">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Subscription Plan:</span>
+                                <span class="fw-bold text-white" id="receiptPlan">Monthly Explorer</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Transaction ID:</span>
+                                <span class="font-monospace" id="receiptTxn">TXN-736829480-BV</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Payment Method:</span>
+                                <span class="text-white"><i class="bi bi-credit-card me-1"></i> Credit Card</span>
+                            </div>
+                            <hr style="border-color: rgba(255,255,255,0.1); margin: 0.75rem 0;">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-semibold text-white">Amount Billed:</span>
+                                <span class="fw-bold text-primary" id="receiptAmount">$4.99</span>
+                            </div>
+                        </div>
+
+                        <p class="text-muted small px-3">We have registered your premium key in your active login session. You can now enjoy high-speed downloads and advanced features!</p>
+                        <div class="mt-4 d-flex gap-3 justify-content-center">
+                            <a href="/" class="btn btn-outline-primary px-4"><i class="bi bi-house me-1"></i> Go Home</a>
+                            <a href="/books" class="btn btn-auth px-4"><i class="bi bi-grid me-1"></i> Start Browsing</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <span class="footer-brand"><i class="bi bi-book-half me-2"></i>BookVault</span>
+                    <p class="mb-0 mt-1" style="font-size:0.8rem; color:var(--clr-text-muted);">
+                        Your digital library, always open.
+                    </p>
+                </div>
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <small>&copy; 2025 E-book Management System &middot; Built with <i class="bi bi-heart-fill text-danger"></i> &amp; Spring Boot</small>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <a href="/" class="me-3" title="Home"><i class="bi bi-house"></i></a>
+                    <a href="/books" class="me-3" title="Browse"><i class="bi bi-grid"></i></a>
+                    <a href="/rating.html" class="me-3" title="Rate Us"><i class="bi bi-star"></i></a>
+                    <a href="/payment.html" class="me-3" title="Payment"><i class="bi bi-credit-card"></i></a>
+                    <a href="/login"><i class="bi bi-person"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top-btn" id="scrollTopBtn" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    <script>
+        (function(){
+            var btn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', function(){
+                btn.classList.toggle('visible', window.scrollY > 300);
+            });
+        })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Interactive script and styles -->
+    <script>
+        let activePrice = 4.99;
+        let activePlanName = "Monthly Explorer";
+
+        function selectTier(tierId, price, planName) {
+            // Remove selection class from all tiers
+            document.querySelectorAll('.tier-card').forEach(card => card.classList.remove('selected'));
+            
+            // Add selection class to selected tier
+            document.getElementById('tier-' + tierId).classList.add('selected');
+            
+            // Update prices
+            activePrice = price;
+            activePlanName = planName;
+            
+            // Update form display
+            document.getElementById('checkoutSubtitle').innerText = `Complete transaction for ${planName} ($${price})`;
+            document.getElementById('checkoutBtn').innerHTML = `<i class="bi bi-shield-lock me-2"></i> Pay $${price} Securely`;
+        }
+
+        // Virtual Card Interactive Functions
+        function flipCard(shouldFlip) {
+            const card = document.getElementById('creditCard');
+            if (shouldFlip) {
+                card.classList.add('flipped');
+            } else {
+                card.classList.remove('flipped');
+            }
+        }
+
+        function updateCardName(val) {
+            const display = document.getElementById('vCardName');
+            display.innerText = val.toUpperCase().trim() === "" ? "YOUR NAME HERE" : val.toUpperCase();
+        }
+
+        function updateCardCvv(val) {
+            const display = document.getElementById('vCardCvv');
+            display.innerText = val.trim() === "" ? "•••" : val;
+        }
+
+        function formatCardNumber(input) {
+            let val = input.value.replace(/\D/g, '');
+            let formatted = '';
+            for (let i = 0; i < val.length; i++) {
+                if (i > 0 && i % 4 === 0) formatted += ' ';
+                formatted += val[i];
+            }
+            input.value = formatted;
+            
+            const display = document.getElementById('vCardNumber');
+            display.innerText = formatted.trim() === "" ? "•••• •••• •••• ••••" : formatted;
+        }
+
+        // Custom expiry MM/YY format helper
+        function formatExpiry(input) {
+            let val = input.value.replace(/\D/g, '');
+            if (val.length >= 2) {
+                input.value = val.substring(0, 2) + '/' + val.substring(2, 4);
+            } else {
+                input.value = val;
+            }
+            
+            const display = document.getElementById('vCardExpiry');
+            display.innerText = input.value.trim() === "" ? "MM/YY" : input.value;
+        }
+
+        function processPayment(e) {
+            e.preventDefault();
+            
+            const formContainer = document.getElementById('checkoutFormContainer');
+            const processingContainer = document.getElementById('processingContainer');
+            const successContainer = document.getElementById('paymentSuccessContainer');
+            
+            // Hide Checkout Form, show processing
+            formContainer.classList.add('d-none');
+            processingContainer.classList.remove('d-none');
+            
+            // Dynamic text updates to make simulation feel realistic
+            const statusText = document.getElementById('processingStatus');
+            const states = [
+                { title: "Securing Connection...", sub: "Verifying secure SSL certificate chains" },
+                { title: "Authorizing Card...", sub: "Routing encrypted token through VisaNet networks" },
+                { title: "Settling Transaction...", sub: "Issuing session entitlement key to client account" }
+            ];
+            
+            let stateIdx = 0;
+            const interval = setInterval(() => {
+                stateIdx++;
+                if (stateIdx < states.length) {
+                    processingContainer.querySelector('h4').innerText = states[stateIdx].title;
+                    statusText.innerText = states[stateIdx].sub;
+                } else {
+                    clearInterval(interval);
+                    
+                    // Show success screen
+                    processingContainer.classList.add('d-none');
+                    successContainer.classList.remove('d-none');
+                    
+                    // Update Receipt Data
+                    document.getElementById('successTierText').innerText = `You are now a ${activePlanName} member.`;
+                    document.getElementById('receiptPlan').innerText = activePlanName;
+                    document.getElementById('receiptAmount').innerText = `$${activePrice}`;
+                    document.getElementById('receiptTxn').innerText = `TXN-${Math.floor(100000000 + Math.random() * 900000000)}-BV`;
+                }
+            }, 1000);
+        }
+    </script>
+
+    <style>
+        .payment-glow-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 10% 30%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 70%, rgba(124, 58, 237, 0.12) 0%, transparent 50%);
+        }
+
+        .z-index-1 { z-index: 1; }
+
+        /* Glowing Orbs */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.12;
+        }
+        .orb-1 {
+            width: 250px;
+            height: 250px;
+            background: var(--clr-accent-1);
+            top: -10%;
+            left: -10%;
+        }
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--clr-teal);
+            bottom: -10%;
+            right: -10%;
+        }
+
+        /* Tier Selection Cards */
+        .tier-card {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-lg);
+            transition: all 0.3s var(--ease-out);
+            cursor: pointer;
+            position: relative;
+        }
+        .tier-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .tier-card.selected {
+            border-color: var(--clr-accent-1);
+            background: rgba(124, 58, 237, 0.08);
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
+        }
+        .badge-recommended {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--clr-accent-1), var(--clr-accent-3));
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.9rem;
+            border-radius: var(--radius-full);
+            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
+        }
+        .tier-features li {
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 3D VIRTUAL CREDIT CARD styling */
+        .credit-card-wrapper {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 380px;
+            height: 220px;
+            margin: 0 auto;
+        }
+        .credit-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .credit-card.flipped {
+            transform: rotateY(180deg);
+        }
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .card-front {
+            background: linear-gradient(135deg, rgba(20, 20, 45, 0.95), rgba(40, 40, 90, 0.95));
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.3) 0%, transparent 40%);
+        }
+        .card-back {
+            background: linear-gradient(135deg, rgba(10, 10, 25, 0.98), rgba(20, 20, 50, 0.98));
+            transform: rotateY(180deg);
+            padding: 0;
+        }
+        .card-chip {
+            width: 45px;
+            height: 35px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);
+        }
+        .card-chip::after {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border: 1px solid rgba(0,0,0,0.25);
+            border-radius: 4px;
+        }
+        .card-logo {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .card-number {
+            font-size: 1.35rem;
+            letter-spacing: 2px;
+            margin-top: 1.75rem;
+            word-spacing: 4px;
+            font-family: monospace;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+        .card-label {
+            font-size: 0.62rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .card-name, .card-expiry {
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
+        }
+        /* Card Back styling */
+        .card-strip {
+            height: 45px;
+            background: #000;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+        .card-back-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .card-signature {
+            height: 38px;
+            background: rgba(255, 255, 255, 0.15);
+            width: 75%;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+        .card-cvv-box {
+            position: absolute;
+            right: 1.5rem;
+            bottom: 3.5rem;
+            width: 60px;
+        }
+        .card-cvv {
+            background: #fff;
+            color: #000;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* checkout billing inputs alignment with rating */
+        .glass-heavy .form-control {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--clr-text);
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            transition: all 0.2s;
+        }
+        .glass-heavy .form-control:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--clr-accent-1);
+            box-shadow: 0 0 0 3px var(--clr-accent-glow);
+            outline: none;
+        }
+        .glass-heavy .form-control::placeholder {
+            color: var(--clr-text-muted);
+            font-size: 0.9rem;
+        }
+        .glass-heavy label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Success & Receipt styles */
+        .checkmark-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.15);
+            border: 2px solid var(--clr-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+            animation: pulse-green 2s infinite;
+        }
+        .checkmark {
+            font-size: 2.5rem;
+            color: var(--clr-green);
+        }
+        .receipt-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-md);
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Animations */
+        .animate-scale-up {
+            animation: scaleUp 0.4s var(--ease-spring) forwards;
+        }
+        @keyframes scaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</body>
+</html>

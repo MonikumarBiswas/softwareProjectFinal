@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Us - BookVault</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-book-half"></i> BookVault
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                    aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="bi bi-house me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/books"><i class="bi bi-grid me-1"></i>Browse</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/rating.html"><i class="bi bi-star-fill me-1" style="color:var(--clr-amber);"></i>Rate Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/payment.html"><i class="bi bi-credit-card-2-front me-1" style="color:var(--clr-teal);"></i>Premium</a>
+                    </li>
+                </ul>
+
+                <!-- Search box -->
+                <form class="d-flex me-3" action="/books/search" method="get">
+                    <div class="input-group" style="min-width:200px;">
+                        <input class="form-control form-control-sm" type="search" name="keyword"
+                               id="navSearchInput"
+                               placeholder="Search books...">
+                        <button class="btn btn-outline-light btn-sm" type="submit" id="navSearchBtn">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <ul class="navbar-nav align-items-center gap-1">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register"><i class="bi bi-person-plus me-1"></i>Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Background photo/glow layer -->
+    <div class="rating-glow-bg"></div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9">
+                <!-- Main Glass Card -->
+                <div class="glass-heavy p-4 p-md-5 position-relative overflow-hidden glow-accent animate-fade-up">
+                    
+                    <!-- Decorative glowing gradient circles inside card -->
+                    <div class="glow-orb orb-1"></div>
+                    <div class="glow-orb orb-2"></div>
+
+                    <!-- Initial Form Screen -->
+                    <div id="ratingFormContainer" class="position-relative z-index-1">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-patch-check-fill gradient-text display-4 mb-2 d-inline-block"></i>
+                            <h2 class="display-6 fw-bold mb-1">How was your experience?</h2>
+                            <p class="text-muted small">We would love to hear your thoughts so we can make BookVault even better.</p>
+                        </div>
+
+                        <form id="ratingForm" onsubmit="submitRatingForm(event)">
+                            
+                            <!-- Star Rating Area -->
+                            <div class="mb-4 text-center">
+                                <label class="form-label d-block text-muted mb-2">Tap to rate your experience</label>
+                                <div class="star-rating d-flex justify-content-center gap-2 mb-2">
+                                    <button type="button" class="star-btn" data-value="1" onclick="selectStar(1)" onmouseenter="hoverStar(1)" onmouseleave="resetStarHover()"><i class="bi bi-star"></i></button>
+                                    <button type="button" class="star-btn" data-value="2" onclick="selectStar(2)" onmouseenter="hoverStar(2)" onmouseleave="resetStarHover()"><i class="bi bi-star"></i></button>
+                                    <button type="button" class="star-btn" data-value="3" onclick="selectStar(3)" onmouseenter="hoverStar(3)" onmouseleave="resetStarHover()"><i class="bi bi-star"></i></button>
+                                    <button type="button" class="star-btn" data-value="4" onclick="selectStar(4)" onmouseenter="hoverStar(4)" onmouseleave="resetStarHover()"><i class="bi bi-star"></i></button>
+                                    <button type="button" class="star-btn" data-value="5" onclick="selectStar(5)" onmouseenter="hoverStar(5)" onmouseleave="resetStarHover()"><i class="bi bi-star"></i></button>
+                                </div>
+                                <div class="emoji-response mt-2">
+                                    <span id="ratingEmoji" class="fs-1">😐</span>
+                                    <p id="ratingText" class="small fw-semibold mt-1 mb-0" style="color: var(--clr-accent-3);">Select a rating</p>
+                                </div>
+                            </div>
+
+                            <!-- What did you like most chips -->
+                            <div class="mb-4">
+                                <label class="form-label text-muted d-block mb-2">What did you like most?</label>
+                                <div class="feedback-chips d-flex flex-wrap gap-2 justify-content-center">
+                                    <div class="chip-toggle" onclick="toggleChip(this)">
+                                        <i class="bi bi-palette me-1"></i> User Interface
+                                    </div>
+                                    <div class="chip-toggle" onclick="toggleChip(this)">
+                                        <i class="bi bi-lightning-charge me-1"></i> Loading Speed
+                                    </div>
+                                    <div class="chip-toggle" onclick="toggleChip(this)">
+                                        <i class="bi bi-journal-bookmark me-1"></i> Book Selection
+                                    </div>
+                                    <div class="chip-toggle" onclick="toggleChip(this)">
+                                        <i class="bi bi-shield-check me-1"></i> Safety & Privacy
+                                    </div>
+                                    <div class="chip-toggle" onclick="toggleChip(this)">
+                                        <i class="bi bi-gift me-1"></i> It's Free!
+                                    </div>
+                                    <div class="chip-toggle" onclick="toggleChip(this)">
+                                        <i class="bi bi-three-dots me-1"></i> Other
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comment Area -->
+                            <div class="mb-4">
+                                <label for="feedbackComments" class="form-label text-muted"><i class="bi bi-chat-left-text me-1"></i> Do you have any specific feedback?</label>
+                                <textarea class="form-control" id="feedbackComments" rows="4" placeholder="Tell us what you loved, or what we can improve..."></textarea>
+                            </div>
+
+                            <!-- User details (Optional/Dummy info) -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-sm-6">
+                                    <label for="feedbackName" class="form-label text-muted"><i class="bi bi-person me-1"></i> Name (Optional)</label>
+                                    <input type="text" class="form-control" id="feedbackName" placeholder="Your name">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="feedbackEmail" class="form-label text-muted"><i class="bi bi-envelope me-1"></i> Email (Optional)</label>
+                                    <input type="email" class="form-control" id="feedbackEmail" placeholder="your@email.com">
+                                </div>
+                            </div>
+
+                            <!-- Action button -->
+                            <button type="submit" class="btn btn-auth w-100" id="submitFeedbackBtn">
+                                <i class="bi bi-send me-2"></i> Submit Feedback
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Success Screen -->
+                    <div id="ratingSuccessContainer" class="position-relative z-index-1 text-center d-none py-5 animate-scale-up">
+                        <div class="success-checkmark-wrapper mb-4">
+                            <div class="checkmark-circle">
+                                <i class="bi bi-check-lg checkmark"></i>
+                            </div>
+                        </div>
+                        <h2 class="display-6 fw-bold mb-2">Thank you!</h2>
+                        <p class="lead mb-4">Your rating has been submitted successfully.</p>
+                        <p class="text-muted small px-md-5">We appreciate you taking the time to share your experience with BookVault. Your response helps us continuously refine and improve our library platform.</p>
+                        <div class="mt-4 d-flex gap-3 justify-content-center">
+                            <a href="/" class="btn btn-outline-primary px-4"><i class="bi bi-house me-1"></i> Back to Home</a>
+                            <a href="/books" class="btn btn-auth px-4"><i class="bi bi-grid me-1"></i> Browse Books</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <span class="footer-brand"><i class="bi bi-book-half me-2"></i>BookVault</span>
+                    <p class="mb-0 mt-1" style="font-size:0.8rem; color:var(--clr-text-muted);">
+                        Your digital library, always open.
+                    </p>
+                </div>
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <small>&copy; 2025 E-book Management System &middot; Built with <i class="bi bi-heart-fill text-danger"></i> &amp; Spring Boot</small>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <a href="/" class="me-3" title="Home"><i class="bi bi-house"></i></a>
+                    <a href="/books" class="me-3" title="Browse"><i class="bi bi-grid"></i></a>
+                    <a href="/rating.html" class="me-3" title="Rate Us"><i class="bi bi-star"></i></a>
+                    <a href="/payment.html" class="me-3" title="Payment"><i class="bi bi-credit-card"></i></a>
+                    <a href="/login"><i class="bi bi-person"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top-btn" id="scrollTopBtn" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    <script>
+        (function(){
+            var btn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', function(){
+                btn.classList.toggle('visible', window.scrollY > 300);
+            });
+        })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Interactive script and style -->
+    <script>
+        let currentRating = 0;
+        const ratingEmojis = {
+            0: "😐",
+            1: "😢",
+            2: "🙁",
+            3: "😐",
+            4: "🙂",
+            5: "😍"
+        };
+        const ratingTexts = {
+            0: "Select a rating",
+            1: "Very Bad - We're sorry to hear that.",
+            2: "Poor - We will work to make it better.",
+            3: "Fair - Let us know what to improve.",
+            4: "Good - Glad you enjoyed your visit!",
+            5: "Excellent - We love that you love it!"
+        };
+
+        function hoverStar(rating) {
+            updateStars(rating);
+            document.getElementById('ratingEmoji').innerText = ratingEmojis[rating];
+            document.getElementById('ratingText').innerText = ratingTexts[rating];
+        }
+
+        function resetStarHover() {
+            updateStars(currentRating);
+            document.getElementById('ratingEmoji').innerText = ratingEmojis[currentRating];
+            document.getElementById('ratingText').innerText = ratingTexts[currentRating];
+        }
+
+        function selectStar(rating) {
+            currentRating = rating;
+            updateStars(currentRating);
+        }
+
+        function updateStars(rating) {
+            const stars = document.querySelectorAll('.star-btn');
+            stars.forEach((star, index) => {
+                const starVal = index + 1;
+                const starIcon = star.querySelector('i');
+                if (starVal <= rating) {
+                    starIcon.className = 'bi bi-star-fill active';
+                } else {
+                    starIcon.className = 'bi bi-star';
+                }
+            });
+        }
+
+        function toggleChip(chip) {
+            chip.classList.toggle('selected');
+        }
+
+        function submitRatingForm(e) {
+            e.preventDefault();
+            if (currentRating === 0) {
+                alert("Please select a star rating first!");
+                return;
+            }
+
+            // Animate transition to success card
+            const formContainer = document.getElementById('ratingFormContainer');
+            const successContainer = document.getElementById('ratingSuccessContainer');
+
+            formContainer.classList.add('animate-fade-out');
+            setTimeout(() => {
+                formContainer.classList.add('d-none');
+                successContainer.classList.remove('d-none');
+            }, 300);
+        }
+    </script>
+
+    <style>
+        /* Base overlay and layout details */
+        .rating-glow-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.12) 0%, transparent 50%);
+        }
+
+        .z-index-1 { z-index: 1; }
+
+        /* Glowing Orbs */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.15;
+        }
+        .orb-1 {
+            width: 250px;
+            height: 250px;
+            background: var(--clr-accent-1);
+            top: -10%;
+            left: -10%;
+        }
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--clr-accent-3);
+            bottom: -10%;
+            right: -10%;
+        }
+
+        /* Star Rating Buttons */
+        .star-rating {
+            display: inline-flex;
+        }
+        .star-btn {
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 2.25rem;
+            color: rgba(255, 255, 255, 0.25);
+            transition: transform 0.2s var(--ease-spring), color 0.2s;
+            cursor: pointer;
+            padding: 0;
+        }
+        .star-btn:hover {
+            transform: scale(1.25);
+        }
+        .star-btn:active {
+            transform: scale(0.9);
+        }
+        .star-btn i.active {
+            color: var(--clr-amber);
+            filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+        }
+
+        /* Interactive Badge Chips */
+        .chip-toggle {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-full);
+            padding: 0.45rem 1.15rem;
+            color: var(--clr-text-muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s var(--ease-out);
+            user-select: none;
+        }
+        .chip-toggle:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--clr-text);
+        }
+        .chip-toggle.selected {
+            background: rgba(124, 58, 237, 0.2);
+            border-color: var(--clr-accent-1);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.25);
+        }
+
+        /* Forms Styling Overrides */
+        .glass-heavy .form-control {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--clr-text);
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            transition: all 0.2s;
+        }
+        .glass-heavy .form-control:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--clr-accent-1);
+            box-shadow: 0 0 0 3px var(--clr-accent-glow);
+            outline: none;
+        }
+        .glass-heavy .form-control::placeholder {
+            color: var(--clr-text-muted);
+            font-size: 0.9rem;
+        }
+        .glass-heavy label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Checkmark Animation for success */
+        .success-checkmark-wrapper {
+            display: inline-block;
+        }
+        .checkmark-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.15);
+            border: 2px solid var(--clr-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+            animation: pulse-green 2s infinite;
+        }
+        .checkmark {
+            font-size: 2.5rem;
+            color: var(--clr-green);
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Animations */
+        .animate-fade-out {
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .animate-scale-up {
+            animation: scaleUp 0.4s var(--ease-spring) forwards;
+        }
+        @keyframes scaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</body>
+</html>
